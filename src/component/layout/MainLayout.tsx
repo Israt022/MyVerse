@@ -1,0 +1,27 @@
+import type { ReactNode } from "react";
+
+type MainLayoutProps = {
+  children: ReactNode;
+};
+
+export default function MainLayout({
+  children,
+}: MainLayoutProps) {
+  return (
+    <div
+      className="
+        mx-auto grid w-full max-w-[1188px]
+        grid-cols-1 gap-4 px-3
+        md:grid-cols-[64px_minmax(0,1fr)]
+        md:gap-4
+        lg:grid-cols-[200px_minmax(0,1fr)_260px]
+        lg:gap-5
+        xl:grid-cols-[220px_minmax(0,620px)_300px]
+        xl:gap-6
+        xl:px-0
+      "
+    >
+      {children}
+    </div>
+  );
+}
