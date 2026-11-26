@@ -1,4 +1,3 @@
-
 import {
   Search,
   PlusSquare,
@@ -7,6 +6,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@heroui/react";
+import Logo from "../shared/Logo";
 
 export default function Navbar() {
   return (
@@ -27,7 +27,7 @@ export default function Navbar() {
       >
         {/* Logo */}
         <div className="shrink-0 text-xl font-bold">
-          MyVerse
+          <Logo />
         </div>
 
         {/* Search */}
