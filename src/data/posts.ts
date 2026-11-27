@@ -1,5 +1,3 @@
-// import type { Post } from "@/components/feed/PostCard";
-
 import { Post } from "@/component/feed/PostCard";
 
 export const posts: Post[] = [

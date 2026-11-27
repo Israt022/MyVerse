@@ -55,7 +55,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <Button
             size="sm"
-            className="hidden md:flex"
+            className="hidden md:flex bg-[#7656D6]"
           >
             <PlusSquare size={17} />
             Create
