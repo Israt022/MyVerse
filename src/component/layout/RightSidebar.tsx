@@ -1,134 +1,139 @@
 import Link from "next/link";
-import { ArrowRight, Plus } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const suggestedArtists = [
-  { name: "Alex Morgan", category: "Digital Artist" },
-  { name: "Sarah James", category: "Photographer" },
-  { name: "Ryan Cooper", category: "Illustrator" },
+  { name: "Alex Morgan", username: "alexart", category: "Digital Artist" },
+  { name: "Sarah James", username: "sarahdesign", category: "Photographer" },
+  { name: "Ryan Cooper", username: "ryancreates", category: "Illustrator" },
 ];
 
-const trendingTags = [
-  "#DigitalArt",
-  "#Photography",
-  "#Illustration",
-  "#CreativeDesign",
+const topics = [
+  "Digital Art",
+  "Photography",
+  "Illustration",
+  "Animation",
+  "Graphic Design",
+  "Concept Art",
+];
+
+const staffPicks = [
+  {
+    id: 4,
+    author: "Emma Wilson",
+    title: "How I built a consistent illustration style in 30 days",
+  },
+  {
+    id: 2,
+    author: "Sarah James",
+    title: "Finding beauty in everyday moments",
+  },
+  {
+    id: 5,
+    author: "David Lee",
+    title: "Color theory for people who hate color theory",
+  },
 ];
 
 export default function RightSidebar() {
   return (
     <aside className="hidden lg:block">
-      <div className="sticky top-[92px] space-y-6 py-5">
-
-        {/* Suggested Artists */}
+      <div className="sticky top-[96px] space-y-8 py-5">
+        {/* Staff Picks (Medium style) */}
         <section className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-sm font-semibold">
-              Suggested Artists
-            </h2>
+          <h2 className="text-sm font-semibold">Staff Picks</h2>
 
-            <Link
-              href="/explore"
-              className="text-xs text-primary"
-            >
-              See all
-            </Link>
+          <div className="space-y-4">
+            {staffPicks.map((pick) => (
+              <Link
+                key={pick.id}
+                href={`/story/${pick.id}`}
+                className="group block"
+              >
+                <p className="text-xs text-muted">{pick.author}</p>
+                <h3 className="mt-0.5 font-serif text-sm font-bold leading-snug group-hover:text-[#7656D6]">
+                  {pick.title}
+                </h3>
+              </Link>
+            ))}
           </div>
+
+          <Link
+            href="/explore"
+            className="inline-flex items-center gap-1 text-xs text-[#7656D6]"
+          >
+            See the full list
+            <ArrowRight size={14} />
+          </Link>
+        </section>
+
+        {/* Who to follow */}
+        <section className="space-y-4">
+          <h2 className="text-sm font-semibold">Who to follow</h2>
 
           <div className="space-y-4">
             {suggestedArtists.map((artist) => (
-              <div
-                key={artist.name}
-                className="flex items-center gap-3"
-              >
+              <div key={artist.username} className="flex items-center gap-3">
                 <div className="size-10 shrink-0 rounded-full bg-surface-tertiary" />
 
-                <div className="min-w-0 flex-1">
+                <Link
+                  href={`/profile/${artist.username}`}
+                  className="min-w-0 flex-1"
+                >
                   <p className="truncate text-sm font-medium">
                     {artist.name}
                   </p>
-
-                  <p className="text-xs text-muted">
+                  <p className="truncate text-xs text-muted">
                     {artist.category}
                   </p>
-                </div>
+                </Link>
 
                 <button
-                  aria-label={`Follow ${artist.name}`}
-                  className="rounded-full p-2 text-primary hover:bg-accent"
+                  className="
+                    shrink-0 rounded-full border border-border
+                    px-3 py-1 text-xs font-medium
+                    transition-colors hover:border-[#7656D6]
+                    hover:text-[#7656D6]
+                  "
                 >
-                  <Plus size={17} />
+                  Follow
                 </button>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Trending Tags */}
+        {/* Recommended topics */}
         <section className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-sm font-semibold">
-              Trending Tags
-            </h2>
-
-            <ArrowRight size={16} className="text-muted" />
-          </div>
+          <h2 className="text-sm font-semibold">Recommended topics</h2>
 
           <div className="flex flex-wrap gap-2">
-            {trendingTags.map((tag) => (
+            {topics.map((topic) => (
               <Link
-                key={tag}
-                href={`/explore?tag=${tag.replace("#", "")}`}
+                key={topic}
+                href={`/explore?tag=${encodeURIComponent(topic)}`}
                 className="
-                  rounded-full bg-surface-secondary
-                  px-3 py-1.5 text-xs text-muted
-                  transition-colors hover:bg-accent
-                  hover:text-primary
+                  rounded-full bg-surface-secondary px-3 py-1.5
+                  text-xs text-muted transition-colors
+                  hover:text-[#7656D6]
                 "
               >
-                {tag}
+                {topic}
               </Link>
             ))}
           </div>
         </section>
 
-        {/* Featured Creator */}
-        <section className="space-y-3">
-          <h2 className="text-sm font-semibold">
-            Featured Creator
-          </h2>
-
-          <div className="rounded-xl border border-border p-4">
-            <div className="mb-3 size-12 rounded-full bg-surface-tertiary" />
-
-            <h3 className="text-sm font-semibold">
-              Creative Artist
-            </h3>
-
-            <p className="mt-1 text-xs text-muted">
-              Featured creator of the week.
-            </p>
-
-            <Link
-              href="/explore"
-              className="mt-3 inline-flex items-center gap-1 text-xs text-primary"
-            >
-              Explore profile
-              <ArrowRight size={14} />
-            </Link>
+        {/* Footer */}
+        <div className="space-y-2">
+          <div className="flex flex-wrap gap-x-3 gap-y-2 text-xs text-muted">
+            <Link href="/about">About</Link>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/terms">Terms</Link>
+            <Link href="/help">Help</Link>
           </div>
-        </section>
 
-        {/* Footer Links */}
-        <div className="flex flex-wrap gap-x-3 gap-y-2 text-xs text-muted">
-          <Link href="/about">About</Link>
-          <Link href="/privacy">Privacy</Link>
-          <Link href="/terms">Terms</Link>
-          <Link href="/help">Help</Link>
+          <p className="text-xs text-muted">© 2026 MyVerse</p>
         </div>
-
-        <p className="text-xs text-muted">
-          © 2026 MyVerse
-        </p>
       </div>
     </aside>
   );
