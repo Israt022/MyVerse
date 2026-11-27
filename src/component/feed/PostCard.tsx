@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import { MoreHorizontal, Play } from "lucide-react";
 
@@ -42,12 +43,8 @@ export function TagList({ tags }: { tags: string[] }) {
       {tags.map((tag) => (
         <Link
           key={tag}
-          href={`/explore?tag=${tag}`}
-          className="
-            rounded-full bg-surface-secondary px-2.5 py-1
-            text-xs text-muted transition-colors
-            hover:text-[#7656D6]
-          "
+          href={`/explore?tag=${encodeURIComponent(tag)}`}
+          className="rounded-full bg-surface-secondary px-2.5 py-1 text-xs text-muted transition-colors hover:text-[#7656D6]"
         >
           #{tag}
         </Link>
@@ -67,13 +64,8 @@ export default function PostCard({ post }: PostCardProps) {
         <PostHeader post={post} />
       </div>
 
-      {/* Media */}
       <div
-        className={`
-          relative flex aspect-[4/3] w-full items-center
-          justify-center bg-gradient-to-br
-          ${getPlaceholderGradient(post.id)}
-        `}
+        className={`relative flex aspect-[4/3] w-full items-center justify-center bg-gradient-to-br ${getPlaceholderGradient(post.id)}`}
       >
         {post.type === "video" && (
           <span className="flex size-14 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur">
